@@ -1,0 +1,801 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <meta
+    name="theme-color"
+    content="#08090d"
+  >
+
+  <meta
+    name="description"
+    content="Clip_ S — AI-powered video clipping, editing and creator platform."
+  >
+
+  <title>Clip_ S — AI Video Clipping Platform</title>
+
+  <link
+    rel="stylesheet"
+    href="/assets/styles.css"
+  >
+</head>
+
+<body>
+
+  <!-- =========================================================
+       APP SHELL
+       ========================================================= -->
+
+  <div id="app">
+
+    <!-- Background effects -->
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+    <!-- =======================================================
+         NAVIGATION
+         ======================================================= -->
+
+    <header class="topbar">
+
+      <a
+        href="/"
+        class="brand"
+        aria-label="Clip_ S home"
+      >
+        <span class="brand-mark">C_</span>
+
+        <span class="brand-name">
+          Clip_ S
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+
+        <button
+          type="button"
+          class="nav-link active"
+          data-section="create"
+        >
+          Create
+        </button>
+
+        <button
+          type="button"
+          class="nav-link"
+          data-section="projects"
+        >
+          Projects
+        </button>
+
+        <button
+          type="button"
+          class="nav-link"
+          data-section="editor"
+        >
+          Editor
+        </button>
+
+        <button
+          type="button"
+          class="nav-link"
+          data-section="marketplace"
+        >
+          Marketplace
+        </button>
+
+      </nav>
+
+      <div class="top-actions">
+
+        <div
+          class="system-status"
+          id="systemStatus"
+          aria-live="polite"
+        >
+          <span class="status-dot"></span>
+          <span id="serverStatus">
+            Connecting…
+          </span>
+        </div>
+
+        <button
+          type="button"
+          class="profile-button"
+          aria-label="Account"
+        >
+          <span>CS</span>
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <!-- =======================================================
+         MAIN CONTENT
+         ======================================================= -->
+
+    <main class="shell">
+
+      <!-- =====================================================
+           CREATE SECTION
+           ===================================================== -->
+
+      <section
+        id="section-create"
+        class="page-section active-section"
+      >
+
+        <div class="hero">
+
+          <div class="eyebrow">
+            AI VIDEO CLIPPING PLATFORM
+          </div>
+
+          <h1>
+            Turn long videos into
+            <span>content.</span>
+          </h1>
+
+          <p class="hero-description">
+            Upload your video. Clip_ S finds the strongest moments,
+            creates short-form clips, and prepares them for editing,
+            captions and publishing.
+          </p>
+
+        </div>
+
+
+        <!-- ===================================================
+             CREATION WORKSPACE
+             =================================================== -->
+
+        <section class="workspace">
+
+          <!-- Upload state -->
+
+          <div
+            class="upload-card"
+            id="uploadCard"
+          >
+
+            <div class="upload-icon">
+              ↑
+            </div>
+
+            <h2>
+              Start with a video
+            </h2>
+
+            <p>
+              Upload a long-form video and let Clip_ S find
+              potential short-form moments.
+            </p>
+
+            <label class="button primary upload-button">
+
+              <span>
+                Choose video
+              </span>
+
+              <input
+                id="fileInput"
+                type="file"
+                accept="video/mp4,video/quicktime,video/x-matroska,video/webm,video/x-m4v,video/x-msvideo"
+                hidden
+              >
+
+            </label>
+
+            <div class="upload-or">
+              or drag and drop your video here
+            </div>
+
+            <div class="upload-supported">
+              MP4 · MOV · MKV · WEBM · M4V · AVI
+            </div>
+
+            <div class="upload-limit">
+              Maximum upload size is configured by Clip_ S.
+            </div>
+
+          </div>
+
+
+          <!-- Active project state -->
+
+          <div
+            class="project-card hidden"
+            id="projectCard"
+          >
+
+            <!-- Project header -->
+
+            <div class="project-head">
+
+              <div class="project-title-wrap">
+
+                <div class="eyebrow">
+                  CURRENT PROJECT
+                </div>
+
+                <h2
+                  id="filename"
+                  class="project-filename"
+                >
+                  Video
+                </h2>
+
+              </div>
+
+              <span
+                class="pill"
+                id="jobStatus"
+              >
+                Waiting
+              </span>
+
+            </div>
+
+
+            <!-- Processing progress -->
+
+            <div class="processing-panel">
+
+              <div class="progress-track">
+                <div
+                  class="progress-bar"
+                  id="progressBar"
+                ></div>
+              </div>
+
+              <div class="progress-row">
+
+                <span id="progressText">
+                  0%
+                </span>
+
+                <span id="jobMessage">
+                  Waiting for video…
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <!-- Video information -->
+
+            <div
+              id="metadataSection"
+              class="metadata-section hidden"
+            >
+
+              <div class="section-head">
+
+                <div>
+                  <div class="eyebrow">
+                    SOURCE VIDEO
+                  </div>
+
+                  <h3>
+                    Video information
+                  </h3>
+                </div>
+
+              </div>
+
+              <div
+                class="metadata-grid"
+                id="metadataGrid"
+              ></div>
+
+            </div>
+
+
+            <!-- AI prompt -->
+
+            <div class="ai-request-panel">
+
+              <div class="section-head">
+
+                <div>
+                  <div class="eyebrow">
+                    CLIP INTELLIGENCE
+                  </div>
+
+                  <h3>
+                    What should Clip_ S look for?
+                  </h3>
+                </div>
+
+              </div>
+
+              <div class="prompt-row">
+
+                <input
+                  id="clipPrompt"
+                  class="text-input"
+                  type="text"
+                  maxlength="500"
+                  placeholder="e.g. Find the funniest and most surprising moments"
+                  autocomplete="off"
+                >
+
+                <button
+                  type="button"
+                  id="analyzeButton"
+                  class="button primary"
+                >
+                  Find moments
+                </button>
+
+              </div>
+
+              <div class="prompt-suggestions">
+
+                <button
+                  type="button"
+                  class="suggestion"
+                  data-prompt="Find the strongest hooks and most attention-grabbing moments"
+                >
+                  Strong hooks
+                </button>
+
+                <button
+                  type="button"
+                  class="suggestion"
+                  data-prompt="Find the funniest moments"
+                >
+                  Funny moments
+                </button>
+
+                <button
+                  type="button"
+                  class="suggestion"
+                  data-prompt="Find the most motivational moments"
+                >
+                  Motivation
+                </button>
+
+                <button
+                  type="button"
+                  class="suggestion"
+                  data-prompt="Find the most surprising moments"
+                >
+                  Surprising
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <!-- Candidate moments -->
+
+            <div
+              id="candidateSection"
+              class="hidden"
+            >
+
+              <div class="section-head">
+
+                <div>
+                  <div class="eyebrow">
+                    AI CANDIDATES
+                  </div>
+
+                  <h3>
+                    Potential moments
+                  </h3>
+                </div>
+
+                <span class="muted">
+                  Ranked candidates
+                </span>
+
+              </div>
+
+              <div
+                class="candidate-grid"
+                id="candidateGrid"
+              ></div>
+
+            </div>
+
+
+            <!-- Generated clips -->
+
+            <div
+              id="outputSection"
+              class="hidden"
+            >
+
+              <div class="section-head">
+
+                <div>
+                  <div class="eyebrow">
+                    GENERATED CLIPS
+                  </div>
+
+                  <h3>
+                    Your short-form cuts
+                  </h3>
+                </div>
+
+                <span class="muted">
+                  9:16 ready
+                </span>
+
+              </div>
+
+              <div
+                class="output-grid"
+                id="outputGrid"
+              ></div>
+
+            </div>
+
+
+            <!-- Error -->
+
+            <div
+              id="errorBox"
+              class="error hidden"
+              role="alert"
+            ></div>
+
+
+            <!-- Project actions -->
+
+            <div class="project-actions">
+
+              <button
+                type="button"
+                class="button secondary"
+                id="newProjectButton"
+              >
+                Start another video
+              </button>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- ===================================================
+             PRODUCT FEATURES
+             =================================================== -->
+
+        <section class="feature-grid">
+
+          <article class="feature-card">
+
+            <span class="feature-number">
+              01
+            </span>
+
+            <div class="feature-icon">
+              ✦
+            </div>
+
+            <h3>
+              Find moments
+            </h3>
+
+            <p>
+              Clip_ S analyzes your video and ranks candidate
+              moments that could become strong short-form content.
+            </p>
+
+          </article>
+
+
+          <article class="feature-card">
+
+            <span class="feature-number">
+              02
+            </span>
+
+            <div class="feature-icon">
+              ◫
+            </div>
+
+            <h3>
+              Create clips
+            </h3>
+
+            <p>
+              Turn selected moments into vertical clips designed
+              for Shorts, Reels and TikTok-style content.
+            </p>
+
+          </article>
+
+
+          <article class="feature-card">
+
+            <span class="feature-number">
+              03
+            </span>
+
+            <div class="feature-icon">
+              ◉
+            </div>
+
+            <h3>
+              Edit & publish
+            </h3>
+
+            <p>
+              The platform is structured for captions, B-roll,
+              branding, effects, analytics and creator workflows.
+            </p>
+
+          </article>
+
+        </section>
+
+      </section>
+
+
+      <!-- =====================================================
+           PROJECTS SECTION
+           ===================================================== -->
+
+      <section
+        id="section-projects"
+        class="page-section"
+      >
+
+        <div class="page-header">
+
+          <div class="eyebrow">
+            YOUR WORKSPACE
+          </div>
+
+          <h2>
+            Projects
+          </h2>
+
+          <p>
+            Your Clip_ S projects will appear here as project
+            persistence is connected to the storage layer.
+          </p>
+
+        </div>
+
+        <div
+          id="projectsEmpty"
+          class="empty-state"
+        >
+
+          <div class="empty-icon">
+            □
+          </div>
+
+          <h3>
+            No projects yet
+          </h3>
+
+          <p>
+            Upload your first video to create a Clip_ S project.
+          </p>
+
+          <button
+            type="button"
+            class="button primary"
+            data-section="create"
+          >
+            Create project
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           EDITOR SECTION
+           ===================================================== -->
+
+      <section
+        id="section-editor"
+        class="page-section"
+      >
+
+        <div class="page-header">
+
+          <div class="eyebrow">
+            CREATOR EDITOR
+          </div>
+
+          <h2>
+            Edit your clips
+          </h2>
+
+          <p>
+            The Clip_ S editor workspace is prepared for timeline
+            editing, captions, B-roll, text, music and branding.
+          </p>
+
+        </div>
+
+        <div class="editor-placeholder">
+
+          <div class="editor-preview">
+            <div class="editor-play">▶</div>
+          </div>
+
+          <div class="editor-tools">
+
+            <div class="tool-card">
+              <strong>✂ Trim</strong>
+              <span>Cut and arrange moments</span>
+            </div>
+
+            <div class="tool-card">
+              <strong>CC Captions</strong>
+              <span>Automatic subtitles</span>
+            </div>
+
+            <div class="tool-card">
+              <strong>▣ B-roll</strong>
+              <span>Add supporting visuals</span>
+            </div>
+
+            <div class="tool-card">
+              <strong>T Text</strong>
+              <span>Hooks and overlays</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           MARKETPLACE SECTION
+           ===================================================== -->
+
+      <section
+        id="section-marketplace"
+        class="page-section"
+      >
+
+        <div class="page-header">
+
+          <div class="eyebrow">
+            CREATOR MARKETPLACE
+          </div>
+
+          <h2>
+            Brands × Creators
+          </h2>
+
+          <p>
+            Clip_ S is designed to eventually connect brands that
+            need short-form content with creators who can produce it.
+          </p>
+
+        </div>
+
+        <div class="marketplace-grid">
+
+          <article class="market-card">
+
+            <div class="market-icon">
+              ◇
+            </div>
+
+            <h3>
+              Brand campaigns
+            </h3>
+
+            <p>
+              Brands can create campaigns, define requirements,
+              set budgets and review creator submissions.
+            </p>
+
+          </article>
+
+
+          <article class="market-card">
+
+            <div class="market-icon">
+              ◎
+            </div>
+
+            <h3>
+              Creator opportunities
+            </h3>
+
+            <p>
+              Creators can discover campaigns, produce clips and
+              submit content for approval.
+            </p>
+
+          </article>
+
+
+          <article class="market-card">
+
+            <div class="market-icon">
+              ↗
+            </div>
+
+            <h3>
+              Performance analytics
+            </h3>
+
+            <p>
+              Campaigns are designed to support views, engagement,
+              watch time, creator performance and ROI analytics.
+            </p>
+
+          </article>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- =======================================================
+         GLOBAL TOAST
+         ======================================================= -->
+
+    <div
+      id="toast"
+      class="toast hidden"
+      role="status"
+      aria-live="polite"
+    ></div>
+
+
+    <!-- =======================================================
+         FOOTER
+         ======================================================= -->
+
+    <footer class="footer">
+
+      <div>
+        <strong>Clip_ S</strong>
+        <span>
+          AI clipping & creator platform
+        </span>
+      </div>
+
+      <div>
+        Built as a separate product from AniVora,
+        AniVora Builder and CareerCraft.
+      </div>
+
+    </footer>
+
+  </div>
+
+
+  <!-- =========================================================
+       APPLICATION JAVASCRIPT
+       ========================================================= -->
+
+  <script
+    src="/assets/app.js"
+    defer
+  ></script>
+
+</body>
+  </html>
